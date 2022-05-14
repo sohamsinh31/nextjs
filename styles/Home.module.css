@@ -1,0 +1,137 @@
+
+.container {
+  padding: 0 2rem;
+  color: white;
+}
+.app_stories{
+  display:flex;
+  flex-direction:row;
+}
+.app_input{
+width: 100%;
+height: 66px
+}
+.app_image{
+  margin-top: 6px;
+  border-radius: 12px;
+}
+.app_story_upload{
+  margin: 10px;
+  float: left;
+  margin-top: 8px;
+  width:20%;
+  height: 50%;
+  border: 1px solid white;
+  border-radius: 12px;
+}
+.div_border{
+  margin-top: 6px;
+  border: 1px solid white;
+  border-radius: 14px;
+}
+.post{
+  max-width: 500px;
+  margin-top: 9px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+  background-color: #ffffff10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
+}
+.post_comment{
+  display:flex;
+  margin-top: 10px;
+}
+.post_comments{
+  color: white;
+  padding: 6px;
+}
+.post_input{
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  color: white;
+}
+.post_button{
+  flex: 0;
+  color: white;
+  background-color: transparent;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.post_image{
+  width: 100%;
+  object-fit: contain;
+  border-radius: 9px;
+}
+.post_text {
+  font-weight: normal;
+  padding: 20px;
+  color: white;
+}
+.post_header {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  padding: 20px 10px 0 0;
+  color: white;
+  
+}
+.post_avatar {
+  margin-right: 10px;
+}
+.post_test {
+  float: left;
+  width: 70%;
+  color: white;
+}
+.time  {
+  float: right;
+  width: 30%;
+  font-size: small;
+  color: white;
+}
+.app_header {
+  background-color: #0e0e0e;
+  padding: 20px;
+  object-fit: container;
+  border-bottom: 1px solid lightgray;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+.app_signup{
+  display: flex;
+  flex-direction: column;
+}
+.imageupload{
+  display: flex;
+  flex-direction: column;
+  width: 66%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #ffffff10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
+  border-top: 1px solid lightgrey;
+}
+.imageupload_progress{
+  width: 100%;
+}
+
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
