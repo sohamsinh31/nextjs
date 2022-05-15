@@ -47,7 +47,6 @@ height: 66px
 }
 .post_comments{
   color: white;
-  padding: 6px;
 }
 .post_input{
   flex: 1;
@@ -89,21 +88,23 @@ height: 66px
   float: left;
   width: 70%;
   color: white;
+  height: 0.5px;
 }
 .time  {
   float: right;
   width: 30%;
   font-size: small;
   color: white;
+  height: 1px;
 }
 .app_header {
   background-color: #0e0e0e;
-  padding: 20px;
   object-fit: container;
   border-bottom: 1px solid lightgray;
   color: white;
   display: flex;
   justify-content: space-between;
+  height: 10%;
 }
 .app_signup{
   display: flex;

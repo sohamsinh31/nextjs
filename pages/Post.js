@@ -54,7 +54,7 @@ const postcomment =(event)=>{
       </a>
     
       <img src={imageurl} className={styles.post_image}/>
-            <h4 className="post_test">{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
+            <h4 className={styles.post_test}>{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
             
     {
       <div className={styles.post_comments}>
