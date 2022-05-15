@@ -39,4 +39,4 @@ export const firebase2 = () => {
   )
 }
 
-export default {app, db, storage ,rdb };
+export {app, db, storage ,rdb };
