@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import 'firebase/firestore';
 import { Avatar } from '@mui/material';
 import { getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
-import {db ,rdb,storage} from './firebase';
+import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
 import { collection, doc, query,getDocs,orderBy} from "firebase/firestore"; 
 import Box from '@mui/material/Box';

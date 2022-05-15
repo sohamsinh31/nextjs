@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React,{useEffect, useState} from 'react';
 import { Avatar } from '@mui/material';
-import {db ,rdb,storage} from './firebase';
+import {db ,rdb,storage} from '../firebase';
 import Userpro from './Userpro';
 import App from './index';
 import {  query, addDoc ,collection, doc, getDocs,child, setDoc ,forEach} from "firebase/firestore"; 

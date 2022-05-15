@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 import { React, useEffect, useState } from 'react';
 import Post from './Post';
-import {db ,rdb,storage} from './firebase';
+import {db ,rdb,storage} from '../firebase';
 import { collection, doc, query,getDocs,where} from "firebase/firestore"; 
 import styles from '../styles/Home.module.css'
 
