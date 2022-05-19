@@ -5,7 +5,7 @@ import Post from './Post';
 import { useEffect } from 'react';
 import 'firebase/firestore';
 import { Avatar } from '@mui/material';
-import { getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
+import {GoogleAuthProvider, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
 import { collection, doc, query,getDocs,orderBy} from "firebase/firestore"; 
@@ -45,6 +45,7 @@ const style = {
 };
 //-------------------------DEFINE VARIABLES-------------------//
 const auth = getAuth();
+const provider = new GoogleAuthProvider();
 const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
@@ -83,46 +84,48 @@ useEffect(()=>{
 },[user,displayusername]);
 const signUp = (event) =>{
   event.preventDefault();
-  createUserWithEmailAndPassword(auth, email, password)
+    // createUserWithEmailAndPassword(auth, email, password)
+  signInWithRedirect(auth, provider)
     .then((authUser) => {
-
-      const strref = ref(storage,`images/${username}/${image.name}`);
-const metadata = {
-    contentType: 'image/jpeg',
-  };
-const uploadtask = uploadBytesResumable(strref,image,metadata)
-uploadtask.on(
-  "state_changed",
-  (snapshot)=>{
-      const progress = Math.round(
-          (snapshot.bytesTransferred/snapshot.totalBytes)*100
-      );
-      setprogress(progress);
-  },
-(error)=>{
-  console.log(error)
-  alert(error.massage);
-},
-()=>{
-  getDownloadURL(ref(storage, `images/${username}/${image.name}`)).then((url)=>{
-seturl(url);
-        setprogress(0);
-        setimage(null);
-  
-  updateProfile(auth.currentUser,{
-    displayName:username,photoURL:url
-  })
-  console.log(authUser);
-  })
-});
-
+setuserurl(authUser.photoURL);
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(error.message)
-      // ..
-    });
+//       const strref = ref(storage,`images/${username}/${image.name}`);
+// const metadata = {
+//     contentType: 'image/jpeg',
+//   };
+// const uploadtask = uploadBytesResumable(strref,image,metadata)
+// uploadtask.on(
+//   "state_changed",
+//   (snapshot)=>{
+//       const progress = Math.round(
+//           (snapshot.bytesTransferred/snapshot.totalBytes)*100
+//       );
+//       setprogress(progress);
+//   },
+// (error)=>{
+//   console.log(error)
+//   alert(error.massage);
+// },
+// ()=>{
+//   getDownloadURL(ref(storage, `images/${username}/${image.name}`)).then((url)=>{
+// seturl(url);
+//         setprogress(0);
+//         setimage(null);
+  
+//   updateProfile(auth.currentUser,{
+//     displayName:username,photoURL:url
+//   })
+//   console.log(authUser);
+//   })
+// });
+
+//     })
+//     .catch((error) => {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       alert(error.message)
+//       // ..
+//     });
     handleClose(true)
 }
 
@@ -148,7 +151,6 @@ getDocs(colref).then(snapshot=>{
   )))
 })
 },[stories]);
-
   return (
     <div className={styles.app}>
     <div className={styles.app_header}>
@@ -165,8 +167,8 @@ getDocs(colref).then(snapshot=>{
           ):
           (
             <div className={styles.app_login}>
-            <Button onClick={()=>setopensignin(true)}>Login</Button>
-            <Button onClick={handleOpen}>SignUp</Button>
+            <Button onClick={signUp}>Login</Button>
+            <Button onClick={signUp}>SignUp</Button>
             </div>
           )
 }

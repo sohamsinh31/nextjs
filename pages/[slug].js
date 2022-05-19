@@ -35,7 +35,9 @@ getDocs(colref).then(snapshot=>{
     <div className={styles.app}>
           <div className={styles.app_header}>
       <h4 style={{fontFamily:'Bradley Hand,cursive',fontSize:'19px'}}>vmeet</h4>
-      </div>
+      </div>..........................
+      ..........
+      
        {
       posts.map(({post},index) =>(
         <Post Type={post.type} key={index}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
