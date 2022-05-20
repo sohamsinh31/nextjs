@@ -15,18 +15,18 @@ import React from 'react'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDxnTDw_z8EpnyZVLQQN17YV82uL956z4Q",
-  authDomain: "webhost-30b9b.firebaseapp.com",
-  databaseURL: "https://webhost-30b9b-default-rtdb.firebaseio.com",
-  projectId: "webhost-30b9b",
-  storageBucket: "webhost-30b9b.appspot.com",
-  messagingSenderId: "708216870816",
-  appId: "1:708216870816:web:e5a312e4be40b3283476c5",
-  measurementId: "G-L7Y9B9PW61"
+  apiKey: "AIzaSyBQFsVNL7SSeyb8VZSkw6-TtWsPX34D2bw",
+  authDomain: "chatapp-74ce0.firebaseapp.com",
+  databaseURL: "https://chatapp-74ce0-default-rtdb.firebaseio.com",
+  projectId: "chatapp-74ce0",
+  storageBucket: "chatapp-74ce0.appspot.com",
+  messagingSenderId: "452732246678",
+  appId: "1:452732246678:web:0368d369e928cf362540b7",
+  measurementId: "G-LKKPVHWFDK"
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+const app = !firebase.apps.length?firebase.initializeApp(firebaseConfig):firebase.app();
 //const app = !firebase.apps.length?firebase.initializeApp(firebaseConfig):firebase.app();
 const storage = getStorage();
 const rdb =  getDatabase();

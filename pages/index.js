@@ -8,7 +8,7 @@ import { Avatar } from '@mui/material';
 import {GoogleAuthProvider, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
-import { collection, doc, query,getDocs,orderBy} from "firebase/firestore"; 
+import { addDoc,collection, doc, query,getDocs,orderBy} from "firebase/firestore"; 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -84,60 +84,18 @@ useEffect(()=>{
 },[user,displayusername]);
 const signUp = (event) =>{
   event.preventDefault();
-    // createUserWithEmailAndPassword(auth, email, password)
   signInWithRedirect(auth, provider)
-    .then((authUser) => {
-setuserurl(authUser.photoURL);
-    })
-//       const strref = ref(storage,`images/${username}/${image.name}`);
-// const metadata = {
-//     contentType: 'image/jpeg',
-//   };
-// const uploadtask = uploadBytesResumable(strref,image,metadata)
-// uploadtask.on(
-//   "state_changed",
-//   (snapshot)=>{
-//       const progress = Math.round(
-//           (snapshot.bytesTransferred/snapshot.totalBytes)*100
-//       );
-//       setprogress(progress);
-//   },
-// (error)=>{
-//   console.log(error)
-//   alert(error.massage);
-// },
-// ()=>{
-//   getDownloadURL(ref(storage, `images/${username}/${image.name}`)).then((url)=>{
-// seturl(url);
-//         setprogress(0);
-//         setimage(null);
-  
-//   updateProfile(auth.currentUser,{
-//     displayName:username,photoURL:url
-//   })
-//   console.log(authUser);
-//   })
-// });
-
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       alert(error.message)
-//       // ..
-//     });
-    handleClose(true)
+    .then((authUser) => (   
+  addDoc(collection(db, "users"), {
+        username:authUser.displayName,
+        email:authUser.email,
+        profile:authUser.photoURL
+      })
+      ))
 }
+function userupdate(authUser){
 
-const signIn = (event) =>{
-  event.preventDefault();
-  signInWithEmailAndPassword(auth, email, password).then(setopensignin(false))
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(error.message)
-  })
-  
+  console.log("success")
 }
 const [stories,setstories] = useState([]);
 useEffect(()=>{
@@ -155,12 +113,13 @@ getDocs(colref).then(snapshot=>{
     <div className={styles.app}>
     <div className={styles.app_header}>
       <h4 style={{fontFamily:'Bradley Hand,cursive',fontSize:'19px'}}>vmeet</h4>
+
       {user?(
                   <Avatar
                   className="post_avatar"
                   alt = 'RafehQazi'
                   src = {userurl}
-                  onClick={()=>deleteUser(auth.currentUser).then(signOut(auth))}
+                  onClick={()=>signOut(auth)}
                   />
             // <Button onClick={()=>signOut(auth)}>Signout</Button>
           

@@ -14,7 +14,6 @@ const [posts,setPosts] = useState([]);
 useEffect(() => {
   if (router.asPath !== router.route) {
     // router.query.lang is defined
-    console.log(router.query)
   }
 }, [router])
 useEffect(()=>{
@@ -29,18 +28,21 @@ getDocs(colref).then(snapshot=>{
     }
   )))
 })
+
 },[posts]);
 
   return (
     <div className={styles.app}>
           <div className={styles.app_header}>
       <h4 style={{fontFamily:'Bradley Hand,cursive',fontSize:'19px'}}>vmeet</h4>
-      </div>..........................
-      ..........
-      
+      </div>
        {
-      posts.map(({post},index) =>(
-        <Post Type={post.type} key={index}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+      posts.map(({post,id},index) =>(
+        post.promise===0?(
+          <div>no posts found</div>
+        ):(
+        <Post Type={post.type} postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+      )
       ))
     }
       </div>
