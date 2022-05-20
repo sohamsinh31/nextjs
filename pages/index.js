@@ -167,8 +167,12 @@ getDocs(colref).then(snapshot=>{
           ):
           (
             <div className={styles.app_login}>
-            <Button onClick={signUp}>Login</Button>
-            <Button onClick={signUp}>SignUp</Button>
+            <Avatar
+                  className="post_avatar"
+                  alt = 'RafehQazi'
+                  src = {userurl}
+                  onClick={signUp}
+                  />
             </div>
           )
 }
@@ -252,8 +256,8 @@ onChange={(e)=>setPassword(e.target.value)}
 
         </div>
     {
-    posts.map(({post},index) =>(
-        <Post Type={post.type} key={index} postId={index} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+    posts.map(({post,id}) =>(
+        <Post Type={post.type} key={id} postId={id} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
       ))
     }
 {/* <Post  username="son41" caption="hi there" imageurl={vplex} /> */}
