@@ -60,7 +60,7 @@ const postcomment =(event)=>{
       <div className={styles.post_comments}>
         {comments.map(({post})=>(
           <p>
-            <strong style={{color:'white',fontSize:'bold',marginRight:'5px'}}><a href={`/${post.username}`}>{post.username}</a></strong>{post.text}
+            <strong style={{color:'gold',fontSize:'bold',marginRight:'5px'}}><a href={`/${post.username}`}>{post.username}</a></strong>{post.text}
           </p>
         ))}
       </div>

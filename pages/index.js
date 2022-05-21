@@ -5,10 +5,10 @@ import Post from './Post';
 import { useEffect } from 'react';
 import 'firebase/firestore';
 import { Avatar } from '@mui/material';
-import {GoogleAuthProvider, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
+import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
-import { addDoc,collection, doc, query,getDocs,orderBy} from "firebase/firestore"; 
+import { addDoc,collection, doc, query,getDocs,orderBy, setDoc} from "firebase/firestore"; 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -85,13 +85,14 @@ useEffect(()=>{
 const signUp = (event) =>{
   event.preventDefault();
   signInWithRedirect(auth, provider)
-    .then((authUser) => (   
+  getRedirectResult(auth).then(
+(authUser) => {  
   addDoc(collection(db, "users"), {
         username:authUser.displayName,
         email:authUser.email,
         profile:authUser.photoURL
-      })
-      ))
+      })}
+      )
 }
 function userupdate(authUser){
 
@@ -112,7 +113,7 @@ getDocs(colref).then(snapshot=>{
   return (
     <div className={styles.app}>
     <div className={styles.app_header}>
-      <h4 style={{fontFamily:'Bradley Hand,cursive',fontSize:'19px'}}>vmeet</h4>
+      <h4 style={{color:'gold',fontSize:'19px'}}>vmeet</h4>
 
       {user?(
                   <Avatar

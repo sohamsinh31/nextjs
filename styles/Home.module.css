@@ -6,6 +6,7 @@
 .app_stories{
   display:flex;
   flex-direction:row;
+  
 }
 .app_input{
 width: 100%;
@@ -23,20 +24,29 @@ height: 66px
   height: 50%;
   border: 1px solid white;
   border-radius: 12px;
+  background-color: #ffffff23;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
 }
 .div_border{
   margin-top: 6px;
   border: 1px solid white;
   border-radius: 14px;
+  background-color: #ffffff23;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
 }
 .post{
+  border: 2px solid gold;
   max-width: 500px;
   margin-top: 9px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   width: 99%;
-  background-color: #ffffff10;
+  background-color: #ffffff23;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
@@ -87,7 +97,7 @@ height: 66px
 .post_test {
   float: left;
   width: 70%;
-  color: white;
+  color: cyan;
   height: 0.5px;
 }
 .time  {
@@ -98,7 +108,6 @@ height: 66px
   height: 1px;
 }
 .app_header {
-  background-color: #0e0e0e;
   object-fit: container;
   border-bottom: 1px solid lightgray;
   color: white;
@@ -119,6 +128,7 @@ height: 66px
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 12px;
+  border: 2px solid gold;
   background-color: #ffffff10;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
