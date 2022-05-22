@@ -2,7 +2,7 @@
 body {
   padding: 0;
   /*background-color: rgb(88, 3, 88);*/
-  background-color: rgb(88, 3, 88);
+  background-color: black);
   background-image: radial-gradient(rgb(255, 255, 255) 3%, transparent 11%),
     radial-gradient(#f0f0f0 3%, transparent 11%);
   background-size: 60px 60px;
