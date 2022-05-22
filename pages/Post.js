@@ -49,7 +49,7 @@ const postcomment =(event)=>{
             alt = 'RafehQazi'
             src = {userurl2}
             />
-            <h3>{username}</h3>
+            <h3 style={{color:'gold'}}>{username}</h3>
       </div>
       </a>
     

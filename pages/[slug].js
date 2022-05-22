@@ -30,21 +30,21 @@ getDocs(colref).then(snapshot=>{
 })
 
 },[posts]);
-
+// console.log(posts.length)
   return (
     <div className={styles.app}>
           <div className={styles.app_header}>
       <h4 style={{color:'gold',fontSize:'19px'}}>vmeet</h4>
       </div>
        {
-      posts.map(({post,id},index) =>(
-        post.promise===0?(
-          <div>no posts found</div>
-        ):(
-        <Post Type={post.type} postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
-      )
-      ))
-    }
+           posts.length==0?(
+            <p>no posts found</p>
+            ):(
+              posts.map(({post,id},index) =>(
+              <Post Type={post.type} postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+          )
+         ))
+            }
       </div>
   )
 }
