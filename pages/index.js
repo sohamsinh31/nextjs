@@ -15,6 +15,7 @@ import Modal from '@mui/material/Modal';
 import { Input } from '@mui/material';
 import Imageuplpad from './Imageuplpad';
 import Stories from './Stories';
+import Footer from './Footer';
 //------------START--------------//
 const App = () => {
   //------LOAD POSTS DATABASE-------------------//
@@ -221,8 +222,10 @@ onChange={(e)=>setPassword(e.target.value)}
       ))
     }
 {/* <Post  username="son41" caption="hi there" imageurl={vplex} /> */}
-
+<Footer userurl={userurl} />
     </div>
+
+    
 )
 }
 export default App;

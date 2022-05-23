@@ -138,7 +138,21 @@ height: 66px
 .imageupload_progress{
   width: 100%;
 }
-
+.app_footer{
+  border: 2px solid gold;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 99%;
+  bottom: 5px;
+  position: fixed;
+  height: 34px;
+  background-color: #ffffff10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
+}
 
 @media (max-width: 600px) {
   .grid {
