@@ -5,6 +5,7 @@ import Post from './Post';
 import {db ,rdb,storage} from '../firebase';
 import { collection, doc, query,getDocs,where} from "firebase/firestore"; 
 import styles from '../styles/Home.module.css'
+import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 
 const Slug = () => {
     const router = useRouter();
@@ -30,6 +31,25 @@ getDocs(colref).then(snapshot=>{
 })
 
 },[posts]);
+const auth = getAuth();
+const [user, setUser] = useState(null);
+const [displayusername, setdisplayusername] = useState(null);
+useEffect(()=>{
+  onAuthStateChanged(auth, (authUser)=>{
+    
+    if(authUser){
+      //user has logged in
+      setUser(authUser);
+      setdisplayusername(authUser.displayName);
+      // setuseremail(authUser.email);
+      // setuserurl(authUser.photoURL);
+    }
+    else {
+      setUser(null);
+      console.log("signed out");
+    }
+  })
+},[user,displayusername]);
 // console.log(posts.length)
   return (
     <div className={styles.app}>
@@ -41,28 +61,11 @@ getDocs(colref).then(snapshot=>{
             <p>no posts found</p>
             ):(
               posts.map(({post,id},index) =>(
-              <Post Type={post.type} postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+              <Post Type={post.type} displayname={displayusername}  postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
           )
          ))
             }
       </div>
   )
 }
-// export default function useQuery() {
-//   const router = useRouter();
-//   const ready = router.asPath !== router.route;
-//   if (!ready) return null;
-//   console.log(router.query)
-//   return router.query;
-// }
-// export function getServerSideProps(context) {
-//   return {
-//     props: {params: context.props}
-//   };
-// }
-
-// export default ({params}) => {
-//   const {id} = params;
-//   return <div>You opened page with {id}</div>;
-// };
 export default Slug

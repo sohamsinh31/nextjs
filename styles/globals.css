@@ -3,13 +3,14 @@ body {
   padding: 0;
   /*background-color: rgb(88, 3, 88);*/
   background-color: black;
-  background-image: radial-gradient(rgb(255, 255, 255) 3%, transparent 11%),
+  /* background-image: radial-gradient(rgb(255, 255, 255) 3%, transparent 11%),
     radial-gradient(#f0f0f0 3%, transparent 11%);
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
-  background-repeat: repeat;
+  background-repeat: repeat; */
   color: white;
   margin: 0;
+  margin-bottom: 34px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
