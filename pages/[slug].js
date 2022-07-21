@@ -3,9 +3,12 @@ import { useRouter } from 'next/router';
 import { React, useEffect, useState } from 'react';
 import Post from './Post';
 import {db ,rdb,storage} from '../firebase';
+import Imageuplpad from './Imageuplpad';
 import { collection, doc, query,getDocs,where} from "firebase/firestore"; 
 import styles from '../styles/Home.module.css'
 import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
+import Footer from './Footer';
+
 
 const Slug = () => {
     const router = useRouter();
@@ -33,6 +36,9 @@ getDocs(colref).then(snapshot=>{
 },[posts]);
 const auth = getAuth();
 const [user, setUser] = useState(null);
+const [username, setUsername] = useState('');
+const [userurl, setuserurl] = useState('');
+const [useremail, setuseremail] = useState(null);
 const [displayusername, setdisplayusername] = useState(null);
 useEffect(()=>{
   onAuthStateChanged(auth, (authUser)=>{
@@ -41,8 +47,8 @@ useEffect(()=>{
       //user has logged in
       setUser(authUser);
       setdisplayusername(authUser.displayName);
-      // setuseremail(authUser.email);
-      // setuserurl(authUser.photoURL);
+      setuseremail(authUser.email);
+      setuserurl(authUser.photoURL);
     }
     else {
       setUser(null);
@@ -51,6 +57,15 @@ useEffect(()=>{
   })
 },[user,displayusername]);
 // console.log(posts.length)
+if(router.query.slug == 'Imageupload'){
+  return (
+    <div>
+    <Imageuplpad email={useremail} userurl={userurl} username={displayusername} />
+    <Footer userurl={userurl} displayname={displayusername} />
+    </div>
+  )
+}
+else{
   return (
     <div className={styles.app}>
           <div className={styles.app_header}>
@@ -67,5 +82,6 @@ useEffect(()=>{
             }
       </div>
   )
+}
 }
 export default Slug

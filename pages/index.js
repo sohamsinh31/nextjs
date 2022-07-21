@@ -5,7 +5,7 @@ import Post from './Post';
 import { useEffect } from 'react';
 import 'firebase/firestore';
 import { Avatar } from '@mui/material';
-import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
+import {GoogleAuthProvider,getRedirectResult, signInWithPopup,signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
 import { addDoc,collection, doc, query,getDocs,orderBy, setDoc} from "firebase/firestore"; 
@@ -85,19 +85,18 @@ useEffect(()=>{
 },[user,displayusername]);
 const signUp = (event) =>{
   event.preventDefault();
-  signInWithRedirect(auth, provider)
-  getRedirectResult(auth).then(
-(authUser) => {  
-  addDoc(collection(db, "users"), {
-        username:authUser.displayName,
-        email:authUser.email,
-        profile:authUser.photoURL
-      })}
-      )
-}
-function userupdate(authUser){
-
-  console.log("success")
+  signInWithPopup(auth, provider)
+.then(
+ result => {  
+  var user = result.user;
+  if(user){
+    addDoc(collection(db, "users"), {
+      username:user.displayName,
+      email:user.email,
+      profile:user.photoURL
+    })}
+  }
+)
 }
 const [stories,setstories] = useState([]);
 useEffect(()=>{
@@ -110,6 +109,10 @@ getDocs(colref).then(snapshot=>{
     }
   )))
 })
+// const signout2 = (event) =>{
+//   event.preventDefault();
+//   signOut(auth)
+// }
 },[stories]);
   return (
     <div className={styles.app}>
@@ -221,8 +224,7 @@ onChange={(e)=>setPassword(e.target.value)}
         <Post Type={post.type} key={id} postId={id} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
       ))
     }
-{/* <Post  username="son41" caption="hi there" imageurl={vplex} /> */}
-<Footer userurl={userurl} />
+<Footer displayname={displayusername} userurl={userurl} />
     </div>
 
     
