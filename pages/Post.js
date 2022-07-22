@@ -6,10 +6,30 @@ import Userpro from './Userpro';
 import App from './index';
 import {  query, addDoc ,collection, doc, getDocs,child, setDoc ,forEach} from "firebase/firestore"; 
 import styles from '../styles/Home.module.css'
+import { FaRegComments } from 'react-icons/fa';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 function Post({Type,username,displayname,postId,userurl2, caption,email, imageurl,timestamp}) {
   const [comment, setcomment] = useState('');
   const [comments, setcomments] = useState([]);
+  const [open, setOpen] = React.useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'black',
+  border: '2px solid #000',
+  boxShadow: 24,
+  color:'black',
+  p: 4,
+};
+
   useEffect(()=>{
     let unsuscribe;
      // let colref= collection(db, "photos", "comments"),postId)
@@ -54,11 +74,12 @@ const postcomment =(event)=>{
       </a>
     
       <img src={imageurl} className={styles.post_image}/>
+        <button onClick={handleOpen}></button><FaRegComments size={25}></FaRegComments> 
             <h4 className={styles.post_test}>{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
             
     {
       <div className={styles.post_comments}>
-        {comments.map(({post})=>(
+        {comments.map(({post},index)=> index<2 && (
           <p>
             <strong style={{color:'gold',fontSize:'bold',marginRight:'5px'}}><a href={`/${post.username}`}>{post.username}</a></strong>{post.text}
           </p>
@@ -80,6 +101,22 @@ const postcomment =(event)=>{
       onClick={postcomment}
       >Post</button>
     </form>
+    <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+          <div className={styles.post_comments}>
+        {comments.map(({post},index)=>  (
+          <p>
+            <strong style={{color:'gold',fontSize:'bold',marginRight:'5px'}}><a href={`/${post.username}`}>{post.username}</a></strong>{post.text}
+          </p>
+        ))}
+      </div>
+      </Box>
+            </Modal>
     </div>
   )
 }

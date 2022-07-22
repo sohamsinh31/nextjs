@@ -1,3 +1,4 @@
+/* eslint-disable */
 import styles from '../styles/Home.module.css'
 import React,{ useState} from 'react';
 import Post from './Post';
