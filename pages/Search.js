@@ -18,7 +18,7 @@ import Stories from './Stories';
 import Footer from './Footer';
 //code starts from here
 const[value,setvalue]=useState('');
-const [queries, setQueries] = useState([]);
+const [queries, setQueries] = useState({});
 useEffect(() => {
 if(value.length>0){
     const colref = query(collection(db,'users'),startAt(value),endAt("\uf8ff"));
