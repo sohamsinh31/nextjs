@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import { FaGithub,FaHome,FaSearch,FaPlus } from 'react-icons/fa'
 import styles from '../styles/Home.module.css'
