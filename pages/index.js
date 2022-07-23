@@ -91,7 +91,7 @@ const signUp = (event) =>{
   var user = result.user;
   if(user){
     addDoc(collection(db, "users"), {
-      username:user.displayName,
+      username:user.displayName.toLocaleLowerCase(),
       email:user.email,
       profile:user.photoURL
     })}

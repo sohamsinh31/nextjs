@@ -8,7 +8,7 @@ const Footer = ({userurl,displayname}) => {
   return (
     <div className={styles.app_footer}>
         <a href='/'><FaHome size={25}/></a>
-        <FaSearch size={25}/>
+        <a href='/search'><FaSearch size={25}/></a>
         <a href='Imageupload'><FaPlus size={25}/></a>
         <a href='https://github.com/sohamsinh31'><FaGithub size={25}/></a>
         <a href={`/${displayname}`}><img src={userurl} alt="soham" style={{borderRadius:'100px',

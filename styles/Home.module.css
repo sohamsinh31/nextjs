@@ -91,6 +91,10 @@ height: 66px
   color: white;
   
 }
+.searchapp{
+  border: white 1px solid;
+  border-radius: 12px;
+}
 .post_avatar {
   margin-right: 10px;
 }

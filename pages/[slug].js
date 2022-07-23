@@ -67,7 +67,7 @@ if(router.query.slug == 'Imageupload'){
   )
 }
 else if(router.query.slug == 'search'){
-  return
+  return <Search/>
 }
 
 else{

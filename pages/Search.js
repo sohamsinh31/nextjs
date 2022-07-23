@@ -4,7 +4,7 @@ import React,{ useState} from 'react';
 import Post from './Post';
 import { useEffect } from 'react';
 import 'firebase/firestore';
-import { Avatar } from '@mui/material';
+import { Avatar, colors } from '@mui/material';
 import {GoogleAuthProvider,getRedirectResult, signInWithPopup,signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
@@ -16,32 +16,58 @@ import { Input } from '@mui/material';
 import Imageuplpad from './Imageuplpad';
 import Stories from './Stories';
 import Footer from './Footer';
+import { FaSearch } from 'react-icons/fa';
+import { async } from '@firebase/util';
 //code starts from here
-const[value,setvalue]=useState('');
+
+const Search = () => {
+  const[value,setvalue]=useState('');
+  const [queries, setQueries] = useState([]);
 useEffect(() => {
 if(value.length>0){
-  const [queries, setQueries] = useState({});
-    const colref = query(collection(db,'users'),startAt(value),endAt("\uf8ff"));
+    const colref = query(collection(db,'users'),orderBy("username"),startAt(value),endAt("\uf8ff"));
     getDocs(colref).then(snapshot=>{
-      if(snapshot.exists()){
-      setQueries(snapshot.docs.map(doc =>(
+    setQueries(snapshot.docs.map(doc =>(
         {
           id:doc.id,
           post:doc.data()
         }
       )))
-}
-else{
-  setQueries({'username':'hello'})
-}
 });
 }
+//console.log(queries)
 }, [queries])
-
-const Search = () => {
+//console.log(queries)
   return (
     <div>
-        <input type="text" className='searchbar' onChange={(e)=> setvalue(e.target.value)} />
+      {/* <form onSubmit={(e)=>e.preventDefault()}> */}
+        <input style={{
+          width:'100%',
+          flex: '1',
+          border: 'none',
+          backgroundColor: 'transparent',
+          borderTop: '1px solid white',
+          borderBottom: '1px solid white',
+          color: 'white'
+        }} placeholder="Search.." type="text" className='searchbar' onChange={(e)=> setvalue(e.target.value)} />
+    {/* </form> */}
+    {
+          queries.map(({post,id}) =>(
+            <div className={styles.searchapp}>
+                <Avatar
+                  className="post_avatar"
+                  style={{
+                    width:'45px',
+                    height:'45px',
+                    float:'left'
+                  }}
+                  alt = 'user'
+                  src = {post.profile}
+                  /><h3>{post.username}</h3>
+            </div>
+            ))
+    }
+
     </div>
   )
 }
