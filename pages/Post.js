@@ -74,7 +74,7 @@ const postcomment =(event)=>{
       </a>
     
       <img src={imageurl} className={styles.post_image}/>
-        <button onClick={handleOpen}></button><FaRegComments size={25}></FaRegComments> 
+        <button onClick={handleOpen}><FaRegComments size={25}></FaRegComments></button>
             <h4 className={styles.post_test}>{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
             
     {

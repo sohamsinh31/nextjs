@@ -8,6 +8,7 @@ import { collection, doc, query,getDocs,where} from "firebase/firestore";
 import styles from '../styles/Home.module.css'
 import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import Footer from './Footer';
+import Search from './Search'
 
 
 const Slug = () => {
@@ -65,6 +66,10 @@ if(router.query.slug == 'Imageupload'){
     </div>
   )
 }
+else if(router.query.slug == 'search'){
+  return
+}
+
 else{
   return (
     <div className={styles.app}>

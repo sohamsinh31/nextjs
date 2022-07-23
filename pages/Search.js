@@ -18,9 +18,9 @@ import Stories from './Stories';
 import Footer from './Footer';
 //code starts from here
 const[value,setvalue]=useState('');
-const [queries, setQueries] = useState({});
 useEffect(() => {
 if(value.length>0){
+  const [queries, setQueries] = useState({});
     const colref = query(collection(db,'users'),startAt(value),endAt("\uf8ff"));
     getDocs(colref).then(snapshot=>{
       if(snapshot.exists()){
