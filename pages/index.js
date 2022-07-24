@@ -63,6 +63,7 @@ const [image, setimage] = useState(null);
 const [progress, setprogress] = useState(0);
 const [url, seturl] = useState('');
 const [userurl, setuserurl] = useState('');
+const [userid, setuserid] = useState('');
 const handleChange = (e) =>{
     if(e.target.files[0]){
         setimage(e.target.files[0]);
@@ -78,6 +79,7 @@ useEffect(()=>{
       setdisplayusername(authUser.displayName);
       setuseremail(authUser.email);
       setuserurl(authUser.photoURL);
+      setuserid(authUser.uid);
     }
     else {
       setUser(null);
@@ -225,7 +227,7 @@ onChange={(e)=>setPassword(e.target.value)}
         </div>
     {
     posts.map(({post,id}) =>(
-        <Post Type={post.type} key={id} postId={id} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+        <Post Type={post.type} userid={userid} key={id} postId={id} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
       ))
     }
 <Footer displayname={displayusername} userurl={userurl} />

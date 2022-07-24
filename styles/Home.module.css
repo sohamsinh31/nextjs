@@ -157,7 +157,11 @@ height: 66px
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
 }
-
+.like{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
 @media (max-width: 600px) {
   .grid {
     width: 100%;

@@ -15,15 +15,16 @@ import React from 'react'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDxnTDw_z8EpnyZVLQQN17YV82uL956z4Q",
-  authDomain: "webhost-30b9b.firebaseapp.com",
-  databaseURL: "https://webhost-30b9b-default-rtdb.firebaseio.com",
-  projectId: "webhost-30b9b",
-  storageBucket: "webhost-30b9b.appspot.com",
-  messagingSenderId: "708216870816",
-  appId: "1:708216870816:web:e5a312e4be40b3283476c5",
-  measurementId: "G-L7Y9B9PW61"
+  apiKey: "AIzaSyCmjerfDldQruH58pHlhG2R2RJ-KyYVgi0",
+  authDomain: "cloudvol.firebaseapp.com",
+  databaseURL: "https://cloudvol-default-rtdb.firebaseio.com",
+  projectId: "cloudvol",
+  storageBucket: "cloudvol.appspot.com",
+  messagingSenderId: "270211077715",
+  appId: "1:270211077715:web:fc230314744d836a5518a6",
+  measurementId: "G-V9416Y049H"
 };
+
 
 // Initialize Firebase
 const app = !firebase.apps.length?firebase.initializeApp(firebaseConfig):firebase.app();

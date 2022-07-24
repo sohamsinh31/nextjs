@@ -11,6 +11,7 @@ import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOu
 import Footer from './Footer';
 import Search from './Search'
 import { Avatar } from '@mui/material';
+import Like from './Like';
 
 
 const Slug = () => {
@@ -91,6 +92,9 @@ if(router.query.slug == 'Imageupload'){
 }
 else if(router.query.slug == 'search'){
   return <Search/>
+}
+else if(slug2 == 'Like'){
+  <Like></Like>
 }
 
 else{

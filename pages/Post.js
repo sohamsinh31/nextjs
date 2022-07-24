@@ -9,8 +9,9 @@ import styles from '../styles/Home.module.css'
 import { FaRegComments } from 'react-icons/fa';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import Like from './Like';
 
-function Post({Type,username,displayname,postId,userurl2, caption,email, imageurl,timestamp}) {
+function Post({Type,userid,username,displayname,postId,userurl2, caption,email, imageurl,timestamp}) {
   const [comment, setcomment] = useState('');
   const [comments, setcomments] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -74,7 +75,8 @@ const postcomment =(event)=>{
       </a>
     
       <img src={imageurl} className={styles.post_image}/>
-        <button onClick={handleOpen}><FaRegComments size={25}></FaRegComments></button>
+      <Like userid={userid} postid={postId}/>
+       <div><FaRegComments style={{float:'right',right:'85%',position:'absolute'}} onClick={handleOpen} size={25}></FaRegComments></div>
             <h4 className={styles.post_test}>{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
             
     {
