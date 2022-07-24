@@ -76,7 +76,7 @@ const postcomment =(event)=>{
     
       <img src={imageurl} className={styles.post_image}/>
       <Like userid={userid} postid={postId}/>
-       <div><FaRegComments style={{float:'right',right:'85%',position:'absolute'}} onClick={handleOpen} size={25}></FaRegComments></div>
+       <div><FaRegComments style={{float:'right',right:'80%',position:'absolute'}} onClick={handleOpen} size={25}></FaRegComments></div>
             <h4 className={styles.post_test}>{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
             
     {

@@ -55,10 +55,10 @@ const Like = ({postid,userid}) => {
     }
   }
   if(!like){
-    return (<div className={styles.like}><HiOutlineHeart size={25} style={{float:'left',position:'absolute'}} onClick={likeupdate}><h4>{count}</h4></HiOutlineHeart></div>)
+    return (<div className={styles.like}><div><HiOutlineHeart size={25} style={{float:'left',position:'absolute'}} onClick={likeupdate}></HiOutlineHeart></div><div><p style={{position:'absolute',float:'right',top:'66%',left:'8%'}}>{count}</p></div></div>)
   }
   else{
-    return (<div className={styles.like}><div><FcLike size={25} style={{float:'left',position:'absolute'}} onClick={checklike}></FcLike></div><div><p style={{position:'absolute',float:'right',top:'70%',left:'5%'}}>{count}</p></div></div>)
+    return (<div className={styles.like}><div><FcLike size={25} style={{float:'left',position:'absolute'}} onClick={checklike}></FcLike></div><div><p style={{position:'absolute',float:'right',top:'66%',left:'8%'}}>{count}</p></div></div>)
   }
 }
 
