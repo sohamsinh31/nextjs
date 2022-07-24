@@ -159,80 +159,16 @@ getDocs(colref).then(snapshot=>{
       <h3>sorry you need to login</h3>
     )
 }
-            <div>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <form className='app_signup'>
-              <h4 style={{
-                textAlign:'center'
-                }}>VMEET</h4>
-                <p>SET PROFILE PHOTO</p>
-    <progress className={styles.imageupload_progress} value={progress} max="100"></progress>
-<input type="file" onChange={handleChange}/>
-<Input
-type="text"
-placeholder='username'
-value={username}
-onChange={(e)=>setUsername(e.target.value)}
-/>
-<Input
-type="email"
-placeholder='email'
-value={email}
-onChange={(e)=>setEmail(e.target.value)}
-/>
-<Input
-type="password"
-placeholder='password'
-value={password}
-onChange={(e)=>setPassword(e.target.value)}
-/>
-<Button type="submit" onClick={signUp}>Signup</Button>
-</form>
-            </Box>
-          </Modal>
-          <Modal
-            open={opensignin}
-            onClose={()=>setopensignin(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <form className='app_signup'>
-              <h4 style={{
-                textAlign:'center'
-                }}>VMEET</h4>
-<Input
-type="email"
-placeholder='email'
-value={email}
-onChange={(e)=>setEmail(e.target.value)}
-/>
-<Input
-type="password"
-placeholder='password'
-value={password}
-onChange={(e)=>setPassword(e.target.value)}
-/>
-<Button type="submit" onClick={signUp}>Login</Button>
-</form>
-            </Box>
-          </Modal>
-
-        </div>
     {
     posts.map(({post,id}) =>(
-        <Post Type={post.type} userid={userid} key={id} postId={id} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
-      ))
+        displayusername?(<Post Type={post.type} userid={userid} key={id} postId={id} userurl2={post.userurl} email={useremail} displayname={displayusername} username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+        ):(
+          <div>login to view posts</div>
+        )
+        ))
     }
 <Footer displayname={displayusername} userurl={userurl} />
     </div>
-
     
 )
 }
