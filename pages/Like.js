@@ -54,12 +54,18 @@ const Like = ({postid,userid}) => {
       setlike(false)
     }
   }
+  if(userid){
   if(!like){
     return (<div className={styles.like}><div><HiOutlineHeart size={25} style={{float:'left',position:'absolute'}} onClick={likeupdate}></HiOutlineHeart></div><div><p style={{position:'absolute',float:'right',top:'66%',left:'8%'}}>{count}</p></div></div>)
   }
   else{
     return (<div className={styles.like}><div><FcLike size={25} style={{float:'left',position:'absolute'}} onClick={checklike}></FcLike></div><div><p style={{position:'absolute',float:'right',top:'66%',left:'8%'}}>{count}</p></div></div>)
   }
+}
+
+else{
+  return (<></>)
+}
 }
 
 export default Like
