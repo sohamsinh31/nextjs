@@ -116,6 +116,21 @@ const postcomment =(event)=>{
             <strong style={{color:'gold',fontSize:'bold',marginRight:'5px'}}><a href={`/${post.username}`}>{post.username}</a></strong>{post.text}
           </p>
         ))}
+            <form className={styles.post_comment}>
+      <input
+      className={styles.post_input}
+      type='text'
+      placeholder="Add a comment.."
+      value={comment}
+      onChange={(e)=>setcomment(e.target.value)}
+      />
+      <button
+      className={styles.post_button}
+      disabled={!comment}
+      type='submit'
+      onClick={postcomment}
+      >Post</button>
+    </form>
       </div>
       </Box>
             </Modal>
