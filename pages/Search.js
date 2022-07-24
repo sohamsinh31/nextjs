@@ -17,7 +17,7 @@ const Search = () => {
   const [queries, setQueries] = useState([]);
 // useEffect(() => {
 if(value.length>0){
-    const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(value),endAt(value+"\uf8ff"));
+    const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(value.toLocaleLowerCase()),endAt(value.toLocaleLowerCase()+"\uf8ff"));
     onValue(colref,(snapshot)=>{
       let data1 =  snapshot.val()
       let array = []
@@ -31,12 +31,6 @@ if(value.length>0){
        
       }
       setQueries(array)
-    // setQueries(snapshot.docs.map(doc =>(
-    //     {
-    //       id:doc.id,
-    //       post:doc.data()
-    //     }
-    //   )))
 },{
   onlyOnce:true
 }
@@ -50,6 +44,7 @@ if(value.length>0){
     <div>
         <input style={{
           width:'100%',
+          height:'33px',
           flex: '1',
           border: 'none',
           backgroundColor: 'transparent',
@@ -60,6 +55,7 @@ if(value.length>0){
     {
      queries?(queries.map((post,id) =>(
             <div className={styles.searchapp}>
+              <a href={`${post[0].username}`}>
                 <Avatar
                   className="post_avatar"
                   style={{
@@ -70,6 +66,7 @@ if(value.length>0){
                   alt = 'user'
                   src = {post[0].profile}
                   /><h3>{post[0].username}</h3>
+                  </a>
             </div>
             ))):(
               <div></div>

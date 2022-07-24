@@ -3,17 +3,20 @@ import { useRouter } from 'next/router';
 import { React, useEffect, useState } from 'react';
 import Post from './Post';
 import {db ,rdb,storage} from '../firebase';
+import { ref,child, query,get,onValue, orderByChild, startAt, endAt } from "firebase/database";
 import Imageuplpad from './Imageuplpad';
-import { collection, doc, query,getDocs,where} from "firebase/firestore"; 
+import { collection, doc, query as q2,getDocs,where} from "firebase/firestore"; 
 import styles from '../styles/Home.module.css'
 import {GoogleAuthProvider,getRedirectResult, signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import Footer from './Footer';
 import Search from './Search'
+import { Avatar } from '@mui/material';
 
 
 const Slug = () => {
     const router = useRouter();
 const {pid} = router.query;
+
 const [posts,setPosts] = useState([]);
 
 useEffect(() => {
@@ -21,10 +24,9 @@ useEffect(() => {
     // router.query.lang is defined
   }
 }, [router])
+const slug2 = router.query.slug;
 useEffect(()=>{
-  //,where("username","==",`${pid.slug}`)
-  // router.query.map(e=>(setpid2(e)));
-const colref = query(collection(db,'photos'),where("username","==",`${router.query.slug}`));
+const colref = q2(collection(db,'photos'),where("username","==",`${router.query.slug}`));
 getDocs(colref).then(snapshot=>{
   setPosts(snapshot.docs.map(doc =>(
     {
@@ -41,6 +43,27 @@ const [username, setUsername] = useState('');
 const [userurl, setuserurl] = useState('');
 const [useremail, setuseremail] = useState(null);
 const [displayusername, setdisplayusername] = useState(null);
+const [queries, setQueries] = useState([]);
+
+const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(slug2),endAt(slug2+"\uf8ff"));
+onValue(colref,(snapshot)=>{
+  let data1 =  snapshot.val()
+  let array = []
+  if(!snapshot.val()){
+    setQueries(null)
+    array = []
+    return;
+    ;}
+  for (const [key, value] of Object.entries(data1)) {
+    array.push([value,key])
+   
+  }
+  setQueries(array)
+},{
+onlyOnce:true
+}
+);
+
 useEffect(()=>{
   onAuthStateChanged(auth, (authUser)=>{
     
@@ -76,6 +99,22 @@ else{
           <div className={styles.app_header}>
       <h4 style={{color:'gold',fontSize:'19px'}}>vmeet</h4>
       </div>
+      {
+              queries.map((post,index)=>(
+            <div className={styles.searchapp}>
+                <Avatar
+                  className="post_avatar"
+                  style={{
+                    width:'65px',
+                    height:'65px',
+                    float:'left'
+                  }}
+                  alt = 'user'
+                  src = {post[0].profile}
+                  /><h2>{post[0].username}</h2>
+                </div>
+              ))
+            }
        {
            posts.length==0?(
             <p>no posts found</p>
