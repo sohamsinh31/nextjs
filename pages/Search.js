@@ -1,46 +1,53 @@
 /* eslint-disable */
 import styles from '../styles/Home.module.css'
-import React,{ useState} from 'react';
+import React,{ useState,useRef} from 'react';
 import Post from './Post';
 import { useEffect } from 'react';
 import 'firebase/firestore';
 import { Avatar, colors } from '@mui/material';
 import {GoogleAuthProvider,getRedirectResult, signInWithPopup,signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
-import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
-import { addDoc,collection, doc, query,getDocs,orderBy, setDoc, startAt, endAt} from "firebase/firestore"; 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import { Input } from '@mui/material';
-import Imageuplpad from './Imageuplpad';
-import Stories from './Stories';
-import Footer from './Footer';
-import { FaSearch } from 'react-icons/fa';
-import { async } from '@firebase/util';
+//import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
+//import { addDoc,collection, doc, query,getDocs,orderBy, setDoc, startAt, endAt} from "firebase/firestore"; 
+import { ref,child, query,get,onValue, orderByChild, startAt, endAt } from "firebase/database";
 //code starts from here
 
 const Search = () => {
   const[value,setvalue]=useState('');
   const [queries, setQueries] = useState([]);
-useEffect(() => {
+// useEffect(() => {
 if(value.length>0){
-    const colref = query(collection(db,'users'),orderBy("username"),startAt(value),endAt("\uf8ff"));
-    getDocs(colref).then(snapshot=>{
-    setQueries(snapshot.docs.map(doc =>(
-        {
-          id:doc.id,
-          post:doc.data()
-        }
-      )))
-});
+    const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(value),endAt(value+"\uf8ff"));
+    onValue(colref,(snapshot)=>{
+      let data1 =  snapshot.val()
+      let array = []
+      if(!snapshot.val()){
+        setQueries(null)
+        array = []
+        return;
+        ;}
+      for (const [key, value] of Object.entries(data1)) {
+        array.push([value,key])
+       
+      }
+      setQueries(array)
+    // setQueries(snapshot.docs.map(doc =>(
+    //     {
+    //       id:doc.id,
+    //       post:doc.data()
+    //     }
+    //   )))
+},{
+  onlyOnce:true
+}
+);
 }
 //console.log(queries)
-}, [queries])
+// }, [queries])
 //console.log(queries)
+
   return (
     <div>
-      {/* <form onSubmit={(e)=>e.preventDefault()}> */}
         <input style={{
           width:'100%',
           flex: '1',
@@ -49,10 +56,9 @@ if(value.length>0){
           borderTop: '1px solid white',
           borderBottom: '1px solid white',
           color: 'white'
-        }} placeholder="Search.." type="text" className='searchbar' onChange={(e)=> setvalue(e.target.value)} />
-    {/* </form> */}
+        }} placeholder="Search.."  type="text" className='searchbar' onChange={(e)=> setvalue(e.target.value)} />
     {
-          queries.map(({post,id}) =>(
+     queries?(queries.map((post,id) =>(
             <div className={styles.searchapp}>
                 <Avatar
                   className="post_avatar"
@@ -62,10 +68,12 @@ if(value.length>0){
                     float:'left'
                   }}
                   alt = 'user'
-                  src = {post.profile}
-                  /><h3>{post.username}</h3>
+                  src = {post[0].profile}
+                  /><h3>{post[0].username}</h3>
             </div>
-            ))
+            ))):(
+              <div></div>
+            )
     }
 
     </div>

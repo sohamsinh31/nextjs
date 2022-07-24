@@ -8,7 +8,8 @@ import { Avatar } from '@mui/material';
 import {GoogleAuthProvider,getRedirectResult, signInWithPopup,signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
-import { addDoc,collection, doc, query,getDocs,orderBy, setDoc} from "firebase/firestore"; 
+import { addDoc,collection, doc, query,getDocs,orderBy, setDoc} from "firebase/firestore";
+import { getDatabase, ref as ref2, set as set2 } from "firebase/database"; 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -16,6 +17,7 @@ import { Input } from '@mui/material';
 import Imageuplpad from './Imageuplpad';
 import Stories from './Stories';
 import Footer from './Footer';
+import { set } from 'firebase/database';
 //------------START--------------//
 const App = () => {
   //------LOAD POSTS DATABASE-------------------//
@@ -90,11 +92,13 @@ const signUp = (event) =>{
  result => {  
   var user = result.user;
   if(user){
-    addDoc(collection(db, "users"), {
+    let userid = user.uid 
+    set2(ref2(rdb, "users/"+userid), {
       username:user.displayName.toLocaleLowerCase(),
       email:user.email,
       profile:user.photoURL
-    })}
+    })
+  }
   }
 )
 }
