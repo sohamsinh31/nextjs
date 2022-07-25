@@ -20,7 +20,7 @@ const handleChange = (e) =>{
 const handleupload = () =>{
 const strref = ref(storage,`images/${username}/${image.name}`);
 const metadata = {
-    contentType: 'image/jpeg',
+    contentType: type,
   };
 const uploadtask = uploadBytesResumable(strref,image,metadata)
 uploadtask.on(

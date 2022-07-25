@@ -104,6 +104,7 @@ const signUp = (event) =>{
   }
 )
 }
+//------------STORIES------------//
 const [stories,setstories] = useState([]);
 useEffect(()=>{
 const colref = (collection(db,'stories'));
@@ -167,7 +168,7 @@ getDocs(colref).then(snapshot=>{
         )
         ))
     }
-<Footer displayname={displayusername} userurl={userurl} />
+<Footer displayname={displayusername} signup={signUp} userurl={userurl} />
     </div>
     
 )

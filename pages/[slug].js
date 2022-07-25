@@ -90,13 +90,9 @@ if(router.query.slug == 'Imageupload'){
     </div>
   )
 }
-else if(router.query.slug == 'search'){
+else if(router.query.slug == 'search'|| slug2 == 'Search'){
   return <Search/>
 }
-else if(slug2 == 'Like'){
-  <Like></Like>
-}
-
 else{
   return (
     <div className={styles.app}>

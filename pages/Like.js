@@ -19,13 +19,16 @@ const Like = ({postid,userid}) => {
             setlike(true)
               break;
           }
+          else{
+            setlike(false)
+          }
         }
       }
     })
   }
+  //console.log(like)
   counter()
   function likeupdate(){
-    console.log(userid)
     push(ref(rdb, `likes/${postid}`), {
       userid:userid
     });
@@ -37,29 +40,30 @@ const Like = ({postid,userid}) => {
       //console.log(postid)
       const colref = get(child(dbref, `likes/${postid}`)).then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           for (const [key, value] of Object.entries(snapshot.val())) {
             console.log(key)
             if(value.userid == userid){
              remove(ref(rdb, `likes/${postid}/${key}`)).then(()=>console.log("data removed"))
              .catch((erorr)=>console.log(error))
+             
                 break;
             }
           }
         }
       })
-
+      setlike(false)
+      counter()
       // 
       //)
-      setlike(false)
+      
     }
   }
   if(userid){
   if(!like){
-    return (<div className={styles.like}><div><HiOutlineHeart size={25} style={{float:'left',position:'absolute'}} onClick={likeupdate}></HiOutlineHeart></div><div><p style={{position:'absolute',float:'right',top:'66%',left:'8%'}}>{count}</p></div></div>)
+    return (<div className={styles.like}><div><HiOutlineHeart size={25} style={{float:'left',position:'absolute'}} onClick={likeupdate}></HiOutlineHeart></div><div><p style={{position:'absolute',float:'right',margin:'auto',left:'8%'}}>{count}</p></div></div>)
   }
   else{
-    return (<div className={styles.like}><div><FcLike size={25} style={{float:'left',position:'absolute'}} onClick={checklike}></FcLike></div><div><p style={{position:'absolute',float:'right',top:'66%',left:'8%'}}>{count}</p></div></div>)
+    return (<div className={styles.like}><div><FcLike size={25} style={{float:'left',position:'absolute'}} onClick={checklike}></FcLike></div><div><p style={{position:'absolute',float:'right',margin:'auto',left:'8%'}}>{count}</p></div></div>)
   }
 }
 

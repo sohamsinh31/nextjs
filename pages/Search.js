@@ -15,12 +15,25 @@ import { ref,child, query,get,onValue, orderByChild, startAt, endAt } from "fire
 const Search = () => {
   const[value,setvalue]=useState('');
   const [queries, setQueries] = useState([]);
+  useEffect(() => {
+  if(value==""){
+    setQueries(null)
+  }
+  if(!value){
+    setQueries(null)
+  }
+}, [queries])
 // useEffect(() => {
 if(value.length>0){
     const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(value.toLocaleLowerCase()),endAt(value.toLocaleLowerCase()+"\uf8ff"));
     onValue(colref,(snapshot)=>{
       let data1 =  snapshot.val()
       let array = []
+      if(!value && value==""){
+        setQueries(null)
+        array=[]
+        return;
+      }
       if(!snapshot.val()){
         setQueries(null)
         array = []

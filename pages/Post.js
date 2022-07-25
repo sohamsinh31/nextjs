@@ -73,9 +73,21 @@ const postcomment =(event)=>{
             <h3 style={{color:'gold'}}>{username}</h3>
       </div>
       </a>
-    
+    {
+      Type=='video/mp4'?(
+        <video
+        src={imageurl}
+        controls
+         className={styles.post_image}
+         objectfit="cover"
+         loading="lazy"
+         placeholder="blurURLData"
+         />
+      ):(
       <img src={imageurl} className={styles.post_image}/>
-      <Like userid={userid} postid={postId}/>
+      )
+    }
+      <div><Like userid={userid} postid={postId}/></div>
        <div><FaRegComments style={{float:'right',right:'80%',position:'absolute'}} onClick={handleOpen} size={25}></FaRegComments></div>
             <h4 className={styles.post_test}>{caption}</h4><h6 className={styles.time}>{timestamp}</h6>
             
