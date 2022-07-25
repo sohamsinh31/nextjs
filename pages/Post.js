@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React,{useEffect, useState} from 'react';
-import { Avatar } from '@mui/material';
+import { Avatar, getToggleButtonGroupUtilityClass } from '@mui/material';
 import {db ,rdb,storage} from '../firebase';
 import Userpro from './Userpro';
 import App from './index';
@@ -73,8 +73,10 @@ const postcomment =(event)=>{
             <h3 style={{color:'gold'}}>{username}</h3>
       </div>
       </a>
-    {
-      Type=='video/mp4'?(
+      {
+      Type==""?(<></>
+      ):(
+       Type=='video/mp4'?(
         <video
         src={imageurl}
         controls
@@ -85,6 +87,7 @@ const postcomment =(event)=>{
          />
       ):(
       <img src={imageurl} className={styles.post_image}/>
+      )
       )
     }
       <div><Like userid={userid} postid={postId}/></div>

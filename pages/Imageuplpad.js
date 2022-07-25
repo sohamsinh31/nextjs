@@ -61,10 +61,11 @@ uploadtask.on(
 }
   return (
     <div className={styles.imageupload}>
-<progress className="imageupload_progress" value={progress} max="100"></progress>
-<input type="text" placeholder='Enter a caption..' onChange={event =>setcaption(event.target.value)} value={caption}/>
-<input accept=".jpeg , .jpg, .png ,.mp4 ,.gif" type="file" onChange={handleChange}/>
-<Button onClick={handleupload}>Upload</Button>
+        <h3>Upload photo/video/gif files here</h3>
+    <progress className="imageupload_progress" value={progress} max="100"></progress>
+    <input type="text" placeholder='Enter a caption..' onChange={event =>setcaption(event.target.value)} value={caption}/>
+    <input accept=".jpeg , .jpg, .png ,.mp4 ,.gif" type="file" onChange={handleChange}/>
+    <Button onClick={handleupload}>Upload</Button>
     </div>
   )
 }

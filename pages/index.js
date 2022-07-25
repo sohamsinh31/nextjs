@@ -104,6 +104,10 @@ const signUp = (event) =>{
   }
 )
 }
+const signOut2 = (event) =>{
+  event.preventDefault();
+  signOut(auth)
+}
 //------------STORIES------------//
 const [stories,setstories] = useState([]);
 useEffect(()=>{
@@ -116,48 +120,44 @@ getDocs(colref).then(snapshot=>{
     }
   )))
 })
-// const signout2 = (event) =>{
-//   event.preventDefault();
-//   signOut(auth)
-// }
 },[stories]);
+//---------------upload what is in your mind---------------//
+const [caption, setcaption] = useState('')
+const handleupload = () =>{
+  const currentDate = new Date();
+
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+  const currentYear = currentDate.getFullYear();
+  
+  const timestamp = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+  addDoc(collection(db, "photos"), {
+    timestamp: timestamp,
+    caption:caption,
+    imageurl:"",
+    userurl:userurl,
+    username:displayusername,
+    email:useremail,
+    type:""
+  });
+  setcaption("");
+}
   return (
     <div className={styles.app}>
     <div className={styles.app_header}>
       <h4 style={{color:'gold',fontSize:'19px'}}>vmeet</h4>
-
-      {user?(
-                  <Avatar
-                  className="post_avatar"
-                  alt = 'RafehQazi'
-                  src = {userurl}
-                  onClick={()=>signOut(auth)}
-                  />
-            // <Button onClick={()=>signOut(auth)}>Signout</Button>
-          
-          ):
-          (
-            <div className={styles.app_login}>
-            <Avatar
-                  className="post_avatar"
-                  alt = 'RafehQazi'
-                  src = {userurl}
-                  onClick={signUp}
-                  />
-            </div>
-          )
-}
     </div>
     {displayusername?(
-<Stories email={useremail} userurl={userurl} username={displayusername} />
+      <div>
+      <Stories email={useremail} userurl={userurl} username={displayusername} />
+      {/* <Imageuplpad email={useremail} userurl={userurl} username={displayusername} /> */}
+        <div className={styles.imageupload}>
+        <input type="text" placeholder={` What's on your mind ${displayusername} ?`} onChange={event =>setcaption(event.target.value)} value={caption}/>
+        <Button onClick={handleupload}>Upload</Button>
+    </div>
+      </div>
     ):(
-<h3>Sorry you need to login</h3>
-    )
-}
-    {displayusername?(
-    <Imageuplpad email={useremail} userurl={userurl} username={displayusername} />
-    ):(
-      <h3>sorry you need to login</h3>
+      <h3>login to view stories</h3>
     )
 }
     {
@@ -168,7 +168,7 @@ getDocs(colref).then(snapshot=>{
         )
         ))
     }
-<Footer displayname={displayusername} signup={signUp} userurl={userurl} />
+<Footer displayname={displayusername} signup={signUp} signout={signOut2} userurl={userurl} />
     </div>
     
 )
