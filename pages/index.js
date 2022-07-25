@@ -18,6 +18,8 @@ import Imageuplpad from './Imageuplpad';
 import Stories from './Stories';
 import Footer from './Footer';
 import { set } from 'firebase/database';
+import {second} from '../public/vmeetlogo.png'
+import Header from './Header';
 //------------START--------------//
 const App = () => {
   //------LOAD POSTS DATABASE-------------------//
@@ -49,26 +51,11 @@ const style = {
 //-------------------------DEFINE VARIABLES-------------------//
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
-const [open, setOpen] = React.useState(false);
-const handleOpen = () => setOpen(true);
-const handleClose = () => setOpen(false);
-const [username, setUsername] = useState('');
-const [password, setPassword] = useState('');
-const [email,setEmail] = useState('');
 const [user, setUser] = useState(null);
-const [opensignin, setopensignin] = useState(false);
 const [useremail, setuseremail] = useState(null);
 const [displayusername, setdisplayusername] = useState(null);
-const [image, setimage] = useState(null);
-const [progress, setprogress] = useState(0);
-const [url, seturl] = useState('');
 const [userurl, setuserurl] = useState('');
 const [userid, setuserid] = useState('');
-const handleChange = (e) =>{
-    if(e.target.files[0]){
-        setimage(e.target.files[0]);
-    }
-}
 //----------------------SIGN OUT SIGN IN LOGIN---------------------//
 useEffect(()=>{
   onAuthStateChanged(auth, (authUser)=>{
@@ -144,15 +131,19 @@ const handleupload = () =>{
 }
   return (
     <div className={styles.app}>
-    <div className={styles.app_header}>
-      <h4 style={{color:'gold',fontSize:'19px'}}>vmeet</h4>
-    </div>
+      <Header/>
     {displayusername?(
       <div>
       <Stories email={useremail} userurl={userurl} username={displayusername} />
       {/* <Imageuplpad email={useremail} userurl={userurl} username={displayusername} /> */}
         <div className={styles.imageupload}>
-        <input type="text" placeholder={` What's on your mind ${displayusername} ?`} onChange={event =>setcaption(event.target.value)} value={caption}/>
+        <input
+        style={{
+          borderRadius:'16px',
+          backgroundColor:'black',
+          color:'white'
+        }}
+         type="text" placeholder={` What's on your mind ${displayusername} ?`} onChange={event =>setcaption(event.target.value)} value={caption}/>
         <Button onClick={handleupload}>Upload</Button>
     </div>
       </div>

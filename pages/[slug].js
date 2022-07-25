@@ -12,6 +12,7 @@ import Footer from './Footer';
 import Search from './Search'
 import { Avatar } from '@mui/material';
 import Like from './Like';
+import Header from './Header';
 
 
 const Slug = () => {
@@ -96,9 +97,7 @@ else if(router.query.slug == 'search'|| slug2 == 'Search'){
 else{
   return (
     <div className={styles.app}>
-          <div className={styles.app_header}>
-      <h4 style={{color:'gold',fontSize:'19px'}}>vmeet</h4>
-      </div>
+      <Header/>
       {
               queries.map((post,index)=>(
             <div className={styles.searchapp}>

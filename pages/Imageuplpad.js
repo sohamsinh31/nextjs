@@ -5,6 +5,7 @@ import {db ,rdb,storage} from '../firebase';
 import { ref,getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import {addDoc,collection,serverTimestamp,increment,Timestamp, doc, setDoc, FieldValue } from "firebase/firestore"; 
 import styles from '../styles/Home.module.css'
+import Header from './Header';
 
 const Imageuplpad = ({username,email,userurl}) => {
 const [caption, setcaption] = useState('');
@@ -60,12 +61,15 @@ uploadtask.on(
 });
 }
   return (
+    <div>
+    <Header/>
     <div className={styles.imageupload}>
         <h3>Upload photo/video/gif files here</h3>
     <progress className="imageupload_progress" value={progress} max="100"></progress>
     <input type="text" placeholder='Enter a caption..' onChange={event =>setcaption(event.target.value)} value={caption}/>
     <input accept=".jpeg , .jpg, .png ,.mp4 ,.gif" type="file" onChange={handleChange}/>
     <Button onClick={handleupload}>Upload</Button>
+    </div>
     </div>
   )
 }
