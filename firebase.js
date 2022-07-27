@@ -15,14 +15,13 @@ import React from 'react'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBQFsVNL7SSeyb8VZSkw6-TtWsPX34D2bw",
-  authDomain: "chatapp-74ce0.firebaseapp.com",
-  databaseURL: "https://chatapp-74ce0-default-rtdb.firebaseio.com",
-  projectId: "chatapp-74ce0",
-  storageBucket: "chatapp-74ce0.appspot.com",
-  messagingSenderId: "452732246678",
-  appId: "1:452732246678:web:0368d369e928cf362540b7",
-  measurementId: "G-LKKPVHWFDK"
+  apiKey: "AIzaSyDX95fvszHSu24dey-J9XsjZwMfgBmhi6E",
+  authDomain: "view1-fff0c.firebaseapp.com",
+  databaseURL: "https://view1-fff0c-default-rtdb.firebaseio.com",
+  projectId: "view1-fff0c",
+  storageBucket: "view1-fff0c.appspot.com",
+  messagingSenderId: "402897917499",
+  appId: "1:402897917499:web:5b6674d385d7b3a272ee1e"
 };
 
 

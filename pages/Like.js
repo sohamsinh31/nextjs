@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {React,useState} from 'react'
+import {React,useState,useEffect} from 'react'
 import {FaAiOutlineLike, HiOutlineHeart, HiOutlineThumbUp, HiThumbUp} from 'react-icons/hi'
 import {FcLike} from 'react-icons/fc'
 import {db ,rdb,storage} from '../firebase';
@@ -24,16 +24,29 @@ const Like = ({postid,userid}) => {
           }
         }
       }
+      else{
+        setlike(false)
+        setcount(0)
+      }
     })
   }
-  //console.log(like)
-  counter()
+//console.log(like)
+  // useEffect(() => {
+    if(like){
+    counter()
+    }
+    counter()
+  // }, [query])
+  
   function likeupdate(){
+    if(!like){
     push(ref(rdb, `likes/${postid}`), {
       userid:userid
     });
-    setlike(true)
-    console.log(like)
+    counter()
+    // setlike(true)
+    // console.log(like)
+  }
   }
   function checklike(){
     if(like){
@@ -41,7 +54,6 @@ const Like = ({postid,userid}) => {
       const colref = get(child(dbref, `likes/${postid}`)).then((snapshot) => {
         if (snapshot.exists()) {
           for (const [key, value] of Object.entries(snapshot.val())) {
-            console.log(key)
             if(value.userid == userid){
              remove(ref(rdb, `likes/${postid}/${key}`)).then(()=>console.log("data removed"))
              .catch((erorr)=>console.log(error))
@@ -51,12 +63,9 @@ const Like = ({postid,userid}) => {
           }
         }
       })
-      setlike(false)
-      counter()
-      // 
-      //)
-      
     }
+          //setlike(false)
+          counter()
   }
   if(userid){
   if(!like){
