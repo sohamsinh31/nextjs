@@ -46,6 +46,7 @@ const [userurl, setuserurl] = useState('');
 const [useremail, setuseremail] = useState(null);
 const [displayusername, setdisplayusername] = useState(null);
 const [queries, setQueries] = useState([]);
+const [userid, setuserid] = useState('');
 
 const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(slug2),endAt(slug2+"\uf8ff"));
 onValue(colref,(snapshot)=>{
@@ -75,6 +76,7 @@ useEffect(()=>{
       setdisplayusername(authUser.displayName);
       setuseremail(authUser.email);
       setuserurl(authUser.photoURL);
+      setuserid(authUser.uid);
     }
     else {
       setUser(null);
@@ -120,7 +122,7 @@ else{
             <p>no posts found</p>
             ):(
               posts.map(({post,id},index) =>(
-              <Post Type={post.type} displayname={displayusername}  postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+              <Post Type={post.type} userid={userid} displayname={displayusername}  postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
           )
          ))
             }
