@@ -47,7 +47,7 @@ const [useremail, setuseremail] = useState(null);
 const [displayusername, setdisplayusername] = useState(null);
 const [queries, setQueries] = useState([]);
 
-const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(slug2.toLocaleLowerCase()),endAt(slug2.toLocaleLowerCase()+"\uf8ff"));
+const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(slug2),endAt(slug2+"\uf8ff"));
 onValue(colref,(snapshot)=>{
   let data1 =  snapshot.val()
   let array = []

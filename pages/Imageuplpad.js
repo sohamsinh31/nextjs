@@ -50,7 +50,7 @@ uploadtask.on(
             caption:caption,
             imageurl:url,
             userurl:userurl,
-            username:username,
+            username:username.toLocaleLowerCase(),
             email:email,
             type:type
           });
