@@ -13,6 +13,8 @@ import Search from './Search'
 import { Avatar } from '@mui/material';
 import Like from './Like';
 import Header from './Header';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 
 const Slug = () => {
@@ -20,6 +22,7 @@ const Slug = () => {
 const {pid} = router.query;
 
 const [posts,setPosts] = useState([]);
+const [images,setImages] = useState([]);
 
 useEffect(() => {
   if (router.asPath !== router.route) {
@@ -36,6 +39,12 @@ getDocs(colref).then(snapshot=>{
       post:doc.data()
     }
   )))
+  // setImages(snapshot.docs.map(doc =>(
+  //   {
+  //     id:doc.id,
+  //     post:doc.data()
+  //   }
+  // )))
 })
 
 },[posts]);
@@ -117,16 +126,35 @@ else{
               )))
                 
             }
+    <ImageList sx={{ width: 500, height: "100%" }} cols={3} rowHeight={124}>
        {
            posts.length==0?(
             <p>no posts found</p>
             ):(
               posts.map(({post,id},index) =>(
-              <Post Type={post.type} userid={userid} displayname={displayusername}  postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
+              post.type==''?(<p>No more images</p>):(
+                <ImageListItem key={index}>
+                <img
+                style={{
+                  width:'120px',
+                  height:'120px',
+                  objectFit:'crop'
+                }}
+                  src={post.imageurl}
+                  srcSet={`${post.imageurl}?w=68&h=68&fit=crop&auto=format&dpr=2 2x`}
+                  alt={post.caption}
+                  loading="lazy"
+                />
+              </ImageListItem>
+              )
+              // <Post Type={post.type} userid={userid} displayname={displayusername}  postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
           )
          ))
             }
+            </ImageList>
+            <Footer/>
       </div>
+     
   )
 }
 }
