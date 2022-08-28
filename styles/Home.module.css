@@ -15,6 +15,8 @@ height: 66px
 .app_image{
   margin-top: 6px;
   border-radius: 12px;
+  width: 100%;
+  height: 91px;
 }
 .app_story_upload{
   margin: 10px;
@@ -33,10 +35,21 @@ height: 66px
   margin-top: 6px;
   border: 1px solid white;
   border-radius: 14px;
+  width:20%;
+  height: 50;
   background-color: #ffffff23;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 spx 15px rgba(121, 86, 86, 0.7);
+}
+.hide{
+  display: none;
+}
+.div_border:hover + .hide{
+  display: block;
+}
+.app_image:hover + .hide{
+  display: block;
 }
 .post{
   border: 2px solid gold;
@@ -161,6 +174,46 @@ height: 66px
   display: flex;
   flex: 1;
   flex-direction: row;
+}
+.box{
+  justify-content:center;
+  align-items:center;
+  border-radius:5px;
+  overflow:hidden;
+  display:flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  background-color: black;
+  border: 2px solid #000;
+  box-shadow: 24;
+  color:'white';
+  z-index: 0;
+  /* p: 4, */
+}
+.box::after{
+  content: "";
+  position: absolute;
+  background: #000;
+  inset: 4px;
+}
+.box::before{
+  content: "";
+  position: absolute;
+  width: 95%;
+  height: 98%;
+  background: linear-gradient(#00ccff,#d400d4);
+  animation: animate 4s linear infinite;
+}
+@keyframes animate{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
 }
 @media (max-width: 600px) {
   .grid {

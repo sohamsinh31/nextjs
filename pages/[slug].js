@@ -67,7 +67,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '100%',
   bgcolor: 'black',
   border: '2px solid #000',
   boxShadow: 24,
@@ -176,9 +176,12 @@ else{
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                   <Box sx={style}>
+                   <Box className={styles.box} >
+                    <div style={{
+                      zIndex:1
+                    }}>
               <Post Type={post.type} userid={userid} displayname={displayusername}  postId={id} key={id}  userurl2={post.userurl}  username={post.username} caption = {post.caption} timestamp={post.timestamp} imageurl={post.imageurl}/>
-              </Box>
+              </div></Box>
               </Modal>
               </div>
           )
