@@ -99,7 +99,7 @@ else{
     <div className={styles.app}>
       <Header/>
       {
-              queries.map((post,index)=>(
+              queries.length==0?(<p>No results found</p>):(queries.map((post,index)=>(
             <div className={styles.searchapp}>
                 <Avatar
                   className="post_avatar"
@@ -112,7 +112,8 @@ else{
                   src = {post[0].profile}
                   /><h2>{post[0].username}</h2>
                 </div>
-              ))
+              )))
+                
             }
        {
            posts.length==0?(
