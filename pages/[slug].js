@@ -26,7 +26,7 @@ useEffect(() => {
     // router.query.lang is defined
   }
 }, [router])
-const slug2 = router.query.slug;
+const slug2 = router.query.slug.toLocaleLowerCase();
 useEffect(()=>{
 const colref = q2(collection(db,'photos'),where("username","==",`${router.query.slug}`));
 getDocs(colref).then(snapshot=>{
