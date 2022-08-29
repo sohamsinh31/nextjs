@@ -191,7 +191,6 @@ height: 66px
   box-shadow: 24;
   color:'white';
   z-index: 0;
-  /* p: 4, */
 }
 .box::after{
   content: "";

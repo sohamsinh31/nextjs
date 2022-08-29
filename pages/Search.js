@@ -10,11 +10,21 @@ import {db ,rdb,storage} from '../firebase';
 //import { ref,getDownloadURL, uploadBytesResumable,deleteObject } from 'firebase/storage';
 //import { addDoc,collection, doc, query,getDocs,orderBy, setDoc, startAt, endAt} from "firebase/firestore"; 
 import { ref,child, query,get,onValue, orderByChild, startAt, endAt } from "firebase/database";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import useMediaQuery from '@mui/material';
+import axios from 'axios';
+import Footer from './Footer';
+
 //code starts from here
 
+const baseurl = "https://picsum.photos/v2/list?page=2&limit=100";
 const Search = () => {
   const[value,setvalue]=useState('');
   const [queries, setQueries] = useState([]);
+  const [open, setOpen] = useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
   useEffect(() => {
   if(value==""){
     setQueries(null)
@@ -23,7 +33,7 @@ const Search = () => {
     setQueries(null)
   }
 }, [queries])
-// useEffect(() => {
+useEffect(() => {
 if(value.length>0){
     const colref = query(ref(rdb,'users/'),orderByChild("username"),startAt(value.toLocaleLowerCase()),endAt(value.toLocaleLowerCase()+"\uf8ff"));
     onValue(colref,(snapshot)=>{
@@ -48,10 +58,16 @@ if(value.length>0){
   onlyOnce:true
 }
 );
-}
+}})
 //console.log(queries)
 // }, [queries])
 //console.log(queries)
+const [images, setimages] = useState([])
+React.useEffect(() => {
+  axios.get(baseurl).then((response) => {
+    setimages(response.data);
+  });
+}, []);
 
   return (
     <div>
@@ -85,7 +101,35 @@ if(value.length>0){
               <div></div>
             )
     }
-
+    <p>This images is  from picsum photos all right is given to honourable owner.This is demo images only.</p>
+ <ImageList sx={{ width: '100%', height: "100%",mb:8,gridTemplateColumns: 'repet(auto-fill,minmax(200px,ifr))!important' }} cols={3} gap={2}>
+  {
+  images?(images.map((key,index) =>(
+    <ImageListItem key={index}>
+              <img
+                onMouseDown={handleClose}
+                onClick={handleOpen}
+                onTouchStart={handleOpen}
+                onTouchCancel={handleClose}
+                onMouseUp={handleOpen}
+                style={{
+                  width:'120px',
+                  height:'120px',
+                  objectFit:'crop'
+                }}
+                  src={key.download_url}
+                  srcSet={key.download_url}
+                  alt={key.author}
+                  loading="lazy"
+                />
+    </ImageListItem>
+  )
+  )):(
+    <p></p>
+  )
+}
+ </ImageList>
+ <Footer/>
     </div>
   )
 }
