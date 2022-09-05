@@ -154,11 +154,7 @@ else{
                 <div>
                 <ImageListItem key={index}>
                 <img
-                onMouseDown={handleClose}
                 onClick={handleOpen}
-                onTouchStart={handleOpen}
-                onTouchCancel={handleClose}
-                onMouseUp={handleOpen}
                 style={{
                   width:'120px',
                   height:'120px',
